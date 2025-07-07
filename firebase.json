@@ -1,0 +1,36 @@
+{
+  "hosting": {
+    "public": "public",
+    "headers": [
+      {
+        "source": "**/*",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "must-revalidate"
+          }
+        ]
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "hosting": {
+      "port": 7077
+    },
+    "ui": {
+      "enabled": true
+    },
+    "firestore": {
+      "port": 8088
+    },
+    "singleProjectMode": true
+  }
+}

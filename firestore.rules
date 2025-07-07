@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /posts/{postId} {
+    	// posts
+      allow read;
+      // - very specific posts
+    }
+    match /users/{userId} {
+      // profile
+      allow read: if request.auth.uid == userId;
+      // - checking if admin
+    }
+
+    match /{document=**} {
+      // admin
+      allow update: if isSuperAdmin() || isAdmin();
+      // - update existing
+
+    	// superadmin
+      allow read, write: if isSuperAdmin();
+      // - *
+    }
+  }
+
+}
+
+function isSuperAdmin() {
+	return request.auth.token.email == '@gmail.com';
+}
+
+function isAdmin() {
+	return get(/databases/$(database)/document/users/$(request.auth.uid)).role == 'admin';
+}

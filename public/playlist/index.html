@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Player</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.17.1/ajv7.min.js"></script>
+
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+
+    <!-- CodeMirror Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/indent-fold.min.js"></script>
+
+    <style>
+        .CodeMirror {
+          border: 1px solid #eee;
+          height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="player-container">
+        <div id="media-player"></div>
+    </div>
+
+    <div id="editor-container-ctrl" style="display: none;">
+        <input type="checkbox" id="show-editor" onchange="document.getElementById('editor-container').style.display = checked ? 'block' : 'none'">
+        <label for="show-editor">Show YAML Editor</label>
+        <p><b>Key: </b><code id="playlist-key"></code></p>
+        <div id="editor-container" style="display: none;">
+            <textarea id="playlist-yaml-editor" style="font-size: 14px; border: 1px solid grey; height: auto;"></textarea>
+            <div>
+                <span>Status</span>
+                <div id="validation-status"></div>
+            </div>
+            <div>
+                <button onclick="validateAndSave()">Save</button>
+                <button onclick="loadConfig()">Load</button>
+            </div>
+            <label for="playlist-yaml-editor"></label>
+        </div>
+    </div>
+
+
+    <script src="/playlist/playlist.js"></script>
+</body>
+</html>
