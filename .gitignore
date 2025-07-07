@@ -93,3 +93,5 @@ dist-ssr
 
 node_modules
 dist
+
+/public/firebase.js
